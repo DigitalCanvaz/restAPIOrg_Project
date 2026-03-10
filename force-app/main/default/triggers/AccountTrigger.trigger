@@ -3,8 +3,11 @@ trigger AccountTrigger on Account (before insert, before update, after update) {
     if (Trigger.isBefore) {
         if (Trigger.isInsert || Trigger.isUpdate) {
             for (Account acc : Trigger.new) {
-                if (acc != null && acc.NumberofLocations__c != null && acc.NumberofLocations__c > 150) {
+                if (acc == null) continue;
+                if (acc.NumberofLocations__c != null && acc.NumberofLocations__c > 150) {
                     acc.CustomerPriority__c = 'High';
+                } else if (acc.NumberofLocations__c != null && acc.NumberofLocations__c <= 150) {
+                    acc.CustomerPriority__c = 'Medium';
                 }
             }
         }
