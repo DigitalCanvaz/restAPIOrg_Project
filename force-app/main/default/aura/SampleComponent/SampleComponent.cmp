@@ -1,7 +1,7 @@
 <aura:component controller="HttpCalloutCtrl">
     <aura:attribute name="ListOfCurrency" type="String[]"/>
     <aura:attribute name="response" type="Map"/>
-	<div class="slds-page-header">
+	<div class="slds-m-around-medium">
         <div>
             <p class="slds-page-header__title slds-truncate" title="Foreign Exchange Rates"> Foreign Exchange Rates by Azar</p>
             
