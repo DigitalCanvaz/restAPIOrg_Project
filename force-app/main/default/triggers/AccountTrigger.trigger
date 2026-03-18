@@ -4,6 +4,19 @@ trigger AccountTrigger on Account (before insert, before update, after update) {
         if (Trigger.isInsert || Trigger.isUpdate) {
             for (Account acc : Trigger.new) {
                 if (acc == null) continue;
+
+                // Set defaults when any of the three fields are null
+                if (acc.AnnualRevenue == null) {
+                    acc.AnnualRevenue = 1000;
+                }
+                if (acc.NumberofLocations__c == null) {
+                    acc.NumberofLocations__c = 5;
+                }
+                if (acc.CustomerPriority__c == null) {
+                    acc.CustomerPriority__c = 'Low';
+                }
+
+                // Apply priority based on NumberofLocations__c when present
                 if (acc.NumberofLocations__c != null && acc.NumberofLocations__c > 150) {
                     acc.CustomerPriority__c = 'High';
                 } else if (acc.NumberofLocations__c != null && acc.NumberofLocations__c <= 150) {
